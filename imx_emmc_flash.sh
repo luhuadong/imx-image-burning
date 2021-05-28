@@ -242,21 +242,30 @@ CheckPermission() {
     fi
 }
 
-if [ "$1" == "--help" ]; then
+if [ -z $1 ] || [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
     echo "Usage: $0 [options] [disk]"
     echo ""
     echo "OPTIONS"
-    echo "  --umount"
-    echo "  --mount"
-    echo "  --all"
-    echo "  --help"
+    echo "  -u, --umount"
+    echo "  -m, --mount"
+    echo "  -p, --partition"
+    echo "  -a, --all"
+    echo "  -h, --help"
+    echo "  -v, --version"
     echo ""
     exit 0
-elif [ "$1" == "--umount" ]; then
+elif [ "$1" == "-v" ] || [ "$1" == "--version" ]; then
+    echo "Script Version: ${Script_Ver}"
+elif [ "$1" == "-u" ] || [ "$1" == "--umount" ]; then
     Umount
-elif [ "$1" == "--mount" ]; then
+elif [ "$1" == "-m" ] || [ "$1" == "--mount" ]; then
     Mount
-elif [ "$1" == "--all" ]; then
+elif [ "$1" == "-p" ] || [ "$1" == "--partition" ]; then
+    Umount
+    Partition
+    Umount
+    Mount
+elif [ "$1" == "-a" ] || [ "$1" == "--all" ]; then
     Chean
     Logging "(*) Bocon eMMC Update for i.MX8 Linux"
     Logging "(*) Script Version : ${Script_Ver}"
