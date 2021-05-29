@@ -6,4 +6,4 @@ unit: sectors
 /dev/mmcblk0p3 : start= 48254976, size= 10485760, Id=83
 /dev/mmcblk0p4 : start= 58740736, size=122142719, Id= 5
 /dev/mmcblk0p5 : start= 58741736, size= 41943040, Id=83
-/dev/mmcblk0p6 : start=100684776, size= 20971520, Id=83
+/dev/mmcblk0p6 : start=100684777, size= 20971520, Id=83

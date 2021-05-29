@@ -87,13 +87,20 @@ CheckFiles() {
 done
 }
 
-# Create disk partition table
-Partition() {
-    Info "Creae disk partition table ..."
+# Delete disk partition
+DeletePartition() {
+    Info "Delete disk partition ..."
 
     Command "sfdisk --delete ${DISK}"
     sfdisk --delete ${DISK}
     sleep 3
+}
+
+# Create disk partition table
+Partition() {
+    Info "Create disk partition table ..."
+
+    DeletePartition
 
     Command "sfdisk ${DISK} < ${FWDIR}/${PARTITION_TABLE}"
     sfdisk ${DISK} < ${FWDIR}/${PARTITION_TABLE}
@@ -171,8 +178,8 @@ Mount() {
     check_ok
 }
 
-Umount() {
-    Info "Try umount ..."
+Unmount() {
+    Info "Try unmount partitions ..."
     for i in {10..1}
     do
         if [ -b ${DISK}p$i ]; then
@@ -246,25 +253,29 @@ if [ -z $1 ] || [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
     echo "Usage: $0 [options] [disk]"
     echo ""
     echo "OPTIONS"
-    echo "  -u, --umount"
-    echo "  -m, --mount"
-    echo "  -p, --partition"
-    echo "  -a, --all"
-    echo "  -h, --help"
-    echo "  -v, --version"
+    echo "  -u, --unmount      Unmount all file systems for the specified disk"
+    echo "  -m, --mount        Mount all file systems for the specified disk"
+    echo "  -p, --partition    Partition for the specified disk"
+    echo "  -d, --delete       Delete all partitions for the specified disk"
+    echo "  -a, --all          Burn eMMC and update all files"
+    echo "  -h, --help         Display this help and exit"
+    echo "  -v, --version      Output version information and exit"
     echo ""
     exit 0
 elif [ "$1" == "-v" ] || [ "$1" == "--version" ]; then
     echo "Script Version: ${Script_Ver}"
-elif [ "$1" == "-u" ] || [ "$1" == "--umount" ]; then
-    Umount
+    exit 0
+elif [ "$1" == "-u" ] || [ "$1" == "--unmount" ]; then
+    Unmount
 elif [ "$1" == "-m" ] || [ "$1" == "--mount" ]; then
     Mount
 elif [ "$1" == "-p" ] || [ "$1" == "--partition" ]; then
-    Umount
+    Unmount
     Partition
-    Umount
+    Unmount
     Mount
+elif [ "$1" == "-d" ] || [ "$1" == "--delete" ]; then
+    DeletePartition
 elif [ "$1" == "-a" ] || [ "$1" == "--all" ]; then
     Chean
     Logging "(*) Bocon eMMC Update for i.MX8 Linux"
@@ -280,9 +291,9 @@ elif [ "$1" == "-a" ] || [ "$1" == "--all" ]; then
     Logging "dtb    : ${DTB}"
     Logging "rootfs : ${ROOTFS}\n"
     Logging "Target disk: ${DISK}"
-    Umount
+    Unmount
     Partition
-    Umount
+    Unmount
     Format
     Mount
     UpdateUBoot
