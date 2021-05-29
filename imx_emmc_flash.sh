@@ -273,6 +273,7 @@ elif [ "$1" == "-p" ] || [ "$1" == "--partition" ]; then
     Unmount
     Partition
     Unmount
+    Format
     Mount
 elif [ "$1" == "-d" ] || [ "$1" == "--delete" ]; then
     DeletePartition

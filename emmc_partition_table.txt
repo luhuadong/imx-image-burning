@@ -4,6 +4,6 @@ unit: sectors
 /dev/mmcblk0p1 : start=    20480, size=  2097152, Id= c, bootable
 /dev/mmcblk0p2 : start=  2117632, size= 46137344, Id=83
 /dev/mmcblk0p3 : start= 48254976, size= 10485760, Id=83
-/dev/mmcblk0p4 : start= 58740736, size=122142719, Id= 5
-/dev/mmcblk0p5 : start= 58741736, size= 41943040, Id=83
-/dev/mmcblk0p6 : start=100684777, size= 20971520, Id=83
+/dev/mmcblk0p4 : start= 58740736, size= 63401984, Id= 5
+/dev/mmcblk0p5 : start= 58742784, size= 41943040, Id=83
+/dev/mmcblk0p6 : start=100687872, size= 20971520, Id=83
