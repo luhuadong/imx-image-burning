@@ -10,7 +10,7 @@ TIME=`date +%H%M%S`
 LOG_FILE="/tmp/imx_emmc_flash_${DATE}_${TIME}.log"
 
 # e.g. evk, k37x, ipc
-BOARD=ipc
+BOARD=k37x
 ROOTFS=rootfs.tar.bz2
 KERNEL=Image
 DTB=imx8mq-${BOARD}.dtb
