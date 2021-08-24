@@ -5,6 +5,8 @@
 Script_Ver="1.0.0"
 Author_Mail=luhuadong@163.com
 
+start=$(date +%s)
+
 DATE=`date +%Y%m%d`
 TIME=`date +%H%M%S`
 LOG_FILE="/tmp/imx_emmc_flash_${DATE}_${TIME}.log"
@@ -314,5 +316,9 @@ else
 	Logging "(*) Update failed!"
 	echo "Update failed, log file in ${LOG_FILE}"
 fi
+
+end=$(date +%s)
+take=$(( end - start ))
+echo "It takes ${take} seconds in total."
 
 exit 0
