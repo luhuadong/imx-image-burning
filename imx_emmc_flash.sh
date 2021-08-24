@@ -104,8 +104,8 @@ Partition() {
 
     DeletePartition
 
-    Command "sfdisk ${DISK} < ${FWDIR}/${PARTITION_TABLE}"
-    sfdisk ${DISK} < ${FWDIR}/${PARTITION_TABLE}
+    Command "sfdisk ${DISK} < ${PARTITION_TABLE}"
+    sfdisk ${DISK} < ${PARTITION_TABLE}
 
     check_ok
     sync
