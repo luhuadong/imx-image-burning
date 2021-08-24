@@ -222,7 +222,7 @@ UpdateUBoot() {
     Command "Clean /dev/mmcblk0boot0 10M"
     dd if=/dev/zero of=/dev/mmcblk0boot0 bs=1k seek=33 count=2048
     check_ok
-    dd if=${UBOOT} of=/dev/mmcblk0boot0 bs=1k seek=33
+    dd if=${FWDIR}/${UBOOT} of=/dev/mmcblk0boot0 bs=1k seek=33
     check_ok
     echo 1 > /sys/block/mmcblk0boot0/force_ro
     mmc bootpart enable 1 1 ${DISK}
