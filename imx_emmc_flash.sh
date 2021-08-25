@@ -93,6 +93,11 @@ done
 DeletePartition() {
     Info "Delete disk partition ..."
 
+    if [ ! -b "${DISK}p1" ]; then
+        echo "${DISK} maybe is a new block device"
+        return
+    fi
+
     Command "sfdisk --delete ${DISK}"
     sfdisk --delete ${DISK}
     sleep 3
