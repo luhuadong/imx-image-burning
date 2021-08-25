@@ -16,6 +16,7 @@ BOARD=k37x
 ROOTFS=rootfs.tar.bz2
 KERNEL=Image
 DTB=imx8mq-${BOARD}.dtb
+DTBS=imx8mq-${BOARD}*
 UBOOT=flash.bin
 
 DEFAULTBLK=/dev/mmcblk0
@@ -209,8 +210,8 @@ UpdateKernel() {
 
 UpdateDTB() {
     Info "Write dtbs ..."
-    Command "cp ${FWDIR}/${DTB} ${TARGET_BOOT} -f"
-    cp ${FWDIR}/${DTB} ${TARGET_BOOT} -f
+    Command "cp ${FWDIR}/${DTBS} ${TARGET_BOOT} -f"
+    cp ${FWDIR}/${DTBS} ${TARGET_BOOT} -f
     check_ok
 }
 
