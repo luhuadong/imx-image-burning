@@ -219,7 +219,7 @@ UpdateDTB() {
 UpdateRootfs() {
     Info "Write rootfs ..."
     Command "tar -jxf ${FWDIR}/${ROOTFS} -C ${TARGET_ROOT}"
-    time tar -jxf ${FWDIR}/${ROOTFS} -C ${TARGET_ROOT}
+    time pv ${FWDIR}/${ROOTFS} | tar -mjxf - -C ${TARGET_ROOT}
     check_ok
 }
 
